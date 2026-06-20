@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import styles from "./DocumentUploadForm.module.css";
 
 function DocumentUploadForm() {
@@ -25,7 +26,7 @@ function DocumentUploadForm() {
     setFile(selectedFile);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     if (!file) {
@@ -34,13 +35,15 @@ function DocumentUploadForm() {
     }
 
     const formData = new FormData();
-    formData.append("document", file);
+    formData.append("menu_file", file);
 
     // Example API call
-    // fetch("/api/upload", {
-    //   method: "POST",
-    //   body: formData,
-    // });
+    const response = await axios.post("http://localhost:4000/api/restaurant-menu/upload", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    console.log(response);
 
     console.log("Uploading:", file.name);
   };
