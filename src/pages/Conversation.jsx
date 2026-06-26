@@ -86,8 +86,8 @@ function Conversation() {
 
   function appendFinal(segments) {
     if (segments.length === 0) return;
-    console.log(segments,"??");
-    
+    console.log(segments,">>>");
+        
     setMessages((prev) => {
       const merged = [...prev];
       for (const seg of segments) {
